@@ -10,6 +10,7 @@ logs
 **/*.back.*
 
 frontend/node_modules
+frontend/build
 
 *.sublime*
 

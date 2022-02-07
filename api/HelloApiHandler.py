@@ -8,9 +8,11 @@
 '''
 
 from flask_restful import Api, Resource, reqparse
+import time
 
 class HelloApiHandler(Resource):
     def get(self):
+        time.sleep(5)
         return {
             'resultStatus' : "SUCCESS",
             'message' : "Hello Api Handler"

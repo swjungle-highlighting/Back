@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import axios from 'axios'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   function onChangeUrl(e){
     console.log('call onChangeUrl()')
-    if (e.target.value.indexOf('youtube') != -1)
+    if (e.target.value.indexOf('youtube') !== -1)
     {
       console.log('This is Youtube link')
       //  app header class 값을 변경
@@ -20,14 +20,25 @@ function App() {
   function sendUrl(e)
   {
     console.log('call sendUrl()')
-    console.log("인풋창 입력값 : ", inputValue.value)
+    if (inputValue)
+    {
+      console.log("인풋창 입력값 : ", inputValue.value)
+    }
+
+    axios.get('http://localhost:5000/flask/hello').then(response =>
+    {
+      console.log("Success", response.data)
+    }).catch(error =>
+    {
+      console.log(error)
+    })
   }
   
   return (
     <div className="App">
       <header className="App-header">
         <p>
-          link input
+          유트하(유튜브, 트위치 하이라이트라는 뜻)
         </p>
 
         <input onChange={onChangeUrl} id='link' />
