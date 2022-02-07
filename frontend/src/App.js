@@ -4,8 +4,8 @@ import axios from 'axios'
 
 function App() {
 
-  const [getMessage, setGetMessage] = useState({})
   const [url, setUrl] = useState('URL : ')
+  const inputValue = document.getElementById('link')
 
   function onChangeUrl(e){
     console.log('call onChangeUrl()')
@@ -13,30 +13,23 @@ function App() {
     {
       console.log('This is Youtube link')
     //  app header class 값을 변경하면
-
     }
     setUrl('URL : ' + e.target.value)
   }
 
-  function sendUrl(e){
-    console.log(e)
-    const url = document.getElementById('link')
+  // const sendUrl = (e) => {
+  //   console.log('call sendUrl()')
+  //
+  //   console.log("인풋창 입력값 : ", inputValue.value)
+  // }
 
-    console.log('call sendUrl()' + ' ' + this.url)
-    console.log(url.innerText)
+  function sendUrl(e)
+  {
+    console.log('call sendUrl()')
+
+    console.log("인풋창 입력값 : ", inputValue.value)
   }
 
-  // useEffect(()=>
-  // {
-  //   axios.get('http://localhost:5000/flask/hello').then(response =>
-  //   {
-  //     console.log("SUCCESS", response)
-  //     setGetMessage(response)
-  //   }).catch(error =>
-  //   {
-  //     console.log(error)
-  //   })
-  // }, [])
 
   return (
     <div className="App">
@@ -47,15 +40,14 @@ function App() {
           link input
         </p>
 
-        <input onChange={onChangeUrl} id='link'/>
-        <h3>{url}</h3>
-        <button onClick={sendUrl}>버튼</button>
+          <input onChange={onChangeUrl} id='link' />
+          <h3>{url}</h3>
+          <button onClick={sendUrl}>버튼</button>
 
         {/*<div>{getMessage.status === 200 ?*/}
         {/*<h3>{getMessage.data.message}</h3>*/}
         {/*:<h3>LOADING</h3>}*/}
         {/*</div>*/}
-
       </header>
     </div>
   );
