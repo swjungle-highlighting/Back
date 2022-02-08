@@ -12,32 +12,27 @@ import time
 
 class HelloApiHandler(Resource):
     def get(self):
-        time.sleep(5)
+        time.sleep(3)
         return {
             'resultStatus' : "SUCCESS",
             'message' : "Hello Api Handler"
         }
 
     def post(self):
-        print(self)
         parser = reqparse.RequestParser()
-        parser.add_argument('type', type=str)
-        parser.add_argument('message', type=str)
+        parser.add_argument('first', type=str)
+        parser.add_argument('second', type=str)
 
         args = parser.parse_args()
-
         print(args)
 
-        request_type = args['type']
-        requset_json = args['message']
+        request_first = args['first']
+        requset_second = args['second']
 
-        ret_status = request_type
-        ret_msg = requset_json
+        ret_first = request_first
+        ret_second = requset_second
 
-        if ret_msg:
-            message = "Your Message Requested : {}".format(ret_msg)
-        else:
-            message = "No Msg"
+        message = "Your Message Requested : first : {}, second : {}".format(ret_first, ret_second)
 
         final_ret = {
             "status" : "Success",

@@ -25,7 +25,29 @@ function App() {
       console.log("인풋창 입력값 : ", inputValue.value)
     }
 
+
+  }
+
+  function getMethod(e)
+  {
+    console.log("call getMethod()")
     axios.get('http://localhost:5000/flask/hello').then(response =>
+        {
+          console.log("Success", response.data)
+        }).catch(error =>
+        {
+          console.log(error)
+      })
+  }
+
+  function postMethod(e)
+  {
+    console.log("call postMethod()")
+    axios.post('http://localhost:5000/flask/hello',
+        {
+          'first' : 'fred',
+          'second' : 'flintstone'
+        }).then(response =>
     {
       console.log("Success", response.data)
     }).catch(error =>
@@ -33,7 +55,7 @@ function App() {
       console.log(error)
     })
   }
-  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -44,6 +66,9 @@ function App() {
         <input onChange={onChangeUrl} id='link' />
         <h3>{url}</h3>
         <button onClick={sendUrl}>버튼</button>
+
+        <button onClick={getMethod}>get method 버튼</button>
+        <button onClick={postMethod}>post method 버튼</button>
 
       </header>
     </div>
