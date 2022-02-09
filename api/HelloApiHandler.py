@@ -8,35 +8,38 @@
 '''
 
 from flask_restful import Api, Resource, reqparse
+
+from api.extract.streamExtract import downloadAudio,downloadVideo
 import time
 
 class HelloApiHandler(Resource):
     def get(self):
-        time.sleep(3)
         return {
+            "type": "GET",
             'resultStatus' : "SUCCESS",
             'message' : "Hello Api Handler"
         }
 
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('first', type=str)
-        parser.add_argument('second', type=str)
+        parser.add_argument('url', type=str)
 
         args = parser.parse_args()
         print(args)
 
-        request_first = args['first']
-        requset_second = args['second']
+        request_url = args['url']
 
-        ret_first = request_first
-        ret_second = requset_second
-
-        message = "Your Message Requested : first : {}, second : {}".format(ret_first, ret_second)
-
+        """
+        stream data fetch
+        """
+        print('start time : ', str(int(time.time())%1000))
+        downloadAudio(request_url)
+        downloadVideo(request_url)
+        print('end time : ', str(int(time.time())%1000))
         final_ret = {
+            "type" : "POST",
             "status" : "Success",
-            "message" : message
+            "url" : request_url
         }
 
         return final_ret

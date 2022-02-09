@@ -28,7 +28,11 @@
     /youtube_highlight_extract/frontend/ npm run-script build
     /youtube_highlight_extract/ flask run
 
-ref : https://towardsdatascience.com/build-deploy-a-react-flask-app-47a89a5d17d9
+ref : 
+1. https://towardsdatascience.com/build-deploy-a-react-flask-app-47a89a5d17d9
+2. https://dev.to/nagatodev/how-to-connect-flask-to-reactjs-1k8i
+3. https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project
+4. https://docs.python.org/ko/3/library/asyncio-task.html#coroutines
 
 -----
 

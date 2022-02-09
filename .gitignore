@@ -18,4 +18,7 @@ psd
 thumb
 sketch
 
+### flask ###
+__pycache__
+
 # End of https://www.toptal.com/developers/gitignore/api/react
