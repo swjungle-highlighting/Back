@@ -9,7 +9,7 @@
 
 from flask_restful import Api, Resource, reqparse
 
-from api.extract.streamExtract import downloadAudio,downloadVideo
+from api.extract.streamExtract import downloadAudio,downloadVideo, downloadChat
 import time
 
 class HelloApiHandler(Resource):
@@ -30,12 +30,20 @@ class HelloApiHandler(Resource):
         request_url = args['url']
 
         """
-        stream data fetch
+        stream data fetch start
         """
+
         print('start time : ', str(int(time.time())%1000))
         downloadAudio(request_url)
         downloadVideo(request_url)
+        url_id = request_url.split("=")[1]
+        downloadChat(url_id)
         print('end time : ', str(int(time.time())%1000))
+
+        """
+        stream data fetch end
+        """
+
         final_ret = {
             "type" : "POST",
             "status" : "Success",
