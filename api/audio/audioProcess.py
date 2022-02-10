@@ -21,4 +21,7 @@ def audioProcess(url_id):
             target = filename
     print('audio target : ' + target)
 
+
+    os.remove(folder+'/api/audio/'+target)
+    print('delete audio target!!')
     """"""

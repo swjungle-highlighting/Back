@@ -21,4 +21,6 @@ def videoProcess(url_id):
             target = filename
     print('video target : ' + target)
 
+    os.remove(folder + '/api/video/' + target)
+    print('delete video target!!')
     """"""
