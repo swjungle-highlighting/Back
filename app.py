@@ -12,8 +12,6 @@ from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 from api.HelloApiHandler import HelloApiHandler
 
-from api.extract.streamExtract import downloadAudio, downloadVideo
-
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 CORS(app)
 api = Api(app)

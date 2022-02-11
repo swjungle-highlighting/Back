@@ -9,13 +9,13 @@
 
 import pytchat
 
-def chatProcess(url_id):
+def chatProcess(url_id, duration):
     print('chat : ' + url_id)
 
     """"""
 
     ####### 영상 길이 동적으로
-    maxminute = 200  # 10시간이면 충분하겠지
+    maxminute = (duration//60)+1  # 10시간이면 충분하겠지
     Distribution = [0 for i in range(maxminute + 1)]
 
     chatset = pytchat.create(video_id=url_id, interruptable=False)

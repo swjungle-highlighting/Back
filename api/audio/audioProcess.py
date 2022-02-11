@@ -8,10 +8,10 @@
 '''
 
 import os
-import numpy as np
-import librosa
+import numpy
+import ffmpeg
 
-def audioProcess(url_id, duration):
+def audioProcess(url_id):
     print('audio ' + url_id)
 
     """"""
@@ -23,18 +23,26 @@ def audioProcess(url_id, duration):
             target = filename
     print('audio target : ' + target)
 
-    wav, sr = librosa.load(folder+'/api/extract/' + target)
+    SAMPLERATE = 11050
 
-    n_fft = 2048
-    hop_length = 512
-    stft = librosa.stft(wav, n_fft=n_fft, hop_length=hop_length)
+    out, err = (
+        ffmpeg
+            .input(folder+'/api/extract/'+target)
+            .output('-', format='f32le', acodec='pcm_f32le', ac=1, ar=str(SAMPLERATE))
+            .run(capture_stdout=True)
+    )
 
-    spectrogram = np.abs(stft)
-    log_spectrogram = librosa.amplitude_to_db(spectrogram)
-    # n = np.array(log_spectrogram)
-    ls = log_spectrogram.tolist()
+    amplitudes = numpy.frombuffer(out, numpy.float32)
 
-    return ls
+    cal = []
+    summ = 0
+    for i in range(len(amplitudes)):
+        if not i % SAMPLERATE:
+            cal.append(summ)
+            summ = 0
+        summ += abs(amplitudes[i])
+
+    return cal
 
     # os.remove(folder+'/api/audio/'+target)
     # print('delete audio target!!')

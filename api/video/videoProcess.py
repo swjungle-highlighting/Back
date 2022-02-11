@@ -11,7 +11,7 @@ import os
 import ffmpeg
 import numpy
 
-def videoProcess(url_id, duration):
+def videoProcess(url_id):
     print('video ' + url_id)
 
     """"""

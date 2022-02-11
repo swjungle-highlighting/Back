@@ -4,8 +4,10 @@
     <list default="true" id="5c5b04ca-0f4e-4b2b-b307-6905e5f9ee2e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/audio/audioProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/audio/audioProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat/chatProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat/chatProcess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/extract/streamExtract.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/extract/streamExtract.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/video/videoProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/video/videoProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,8 @@
       <workItem from="1644561747482" duration="266000" />
       <workItem from="1644579507615" duration="4561000" />
       <workItem from="1644585168414" duration="6659000" />
-      <workItem from="1644594420186" duration="1654000" />
+      <workItem from="1644594420186" duration="1709000" />
+      <workItem from="1644602052287" duration="3039000" />
     </task>
     <servers />
   </component>
