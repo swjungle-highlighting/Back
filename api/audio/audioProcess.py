@@ -18,12 +18,12 @@ def audioProcess(url_id):
 
     folder = os.getcwd()
     target = ''
-    for filename in os.listdir(folder+'/api/audio/'):
+    for filename in os.listdir(folder+'/api/extract/'):
         if url_id in filename:
             target = filename
     print('audio target : ' + target)
 
-    wav, sr = librosa.load(target)
+    wav, sr = librosa.load(folder+'/api/extract/' + target)
 
     n_fft = 2048
     hop_length = 512
@@ -31,8 +31,11 @@ def audioProcess(url_id):
 
     spectrogram = np.abs(stft)
     log_spectrogram = librosa.amplitude_to_db(spectrogram)
-    n = np.array(log_spectrogram)
+    # n = np.array(log_spectrogram)
+    ls = log_spectrogram.tolist()
 
-    os.remove(folder+'/api/audio/'+target)
-    print('delete audio target!!')
+    return ls
+
+    # os.remove(folder+'/api/audio/'+target)
+    # print('delete audio target!!')
     """"""

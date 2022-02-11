@@ -28,6 +28,13 @@ video_opts = {
     'outtmpl' : './api/video/%(id)s.%(ext)s',
 }
 
+opts = {
+    'ignoreerrors' : True,
+    'nooverwrites' : True,
+    'format' : 'worstvideo[height<=144]+worstaudio/worst[height<=144]/worst',
+    'outtmpl' : './api/extract/%(id)s.%(ext)s',
+
+}
 def downloadAudio(url):
     print('::audio::')
     with yt_dlp.YoutubeDL(audio_opts) as ydl:
@@ -47,3 +54,25 @@ def downloadVideo(url):
 def downloadChat(url_id):
     print('::chat::')
     chatProcess(url_id)
+
+
+def streamProcess(url):
+    print('::stream::')
+    url_id = url.split("=")[1]
+    with yt_dlp.YoutubeDL(opts) as ydl:
+        ydl.download([url])
+
+    # a= audioProcess(url_id)
+    b= videoProcess(url_id)
+    # c= chatProcess(url_id)
+
+    folder = os.getcwd()
+    target = ''
+    for filename in os.listdir(folder + '/api/extract/'):
+        if url_id in filename:
+            target = filename
+
+    os.remove(folder + '/api/extract/' + target)
+    print('delete stream target!!')
+
+    return [b]

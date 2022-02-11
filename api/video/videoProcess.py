@@ -18,7 +18,7 @@ def videoProcess(url_id):
 
     folder = os.getcwd()
     target = ''
-    for filename in os.listdir(folder+'/api/video/'):
+    for filename in os.listdir(folder+'/api/extract/'):
         if url_id in filename:
             target = filename
     print('video target : ' + target)
@@ -26,7 +26,7 @@ def videoProcess(url_id):
     W, H, FPS = 128, 72, 10
     out, err = (
         ffmpeg
-            .input(target)
+            .input(folder+'/api/extract/'+target)
             .filter('fps', fps=FPS, round='up')
             .filter('scale', w=W, h=H)
             .output('pipe:', format='rawvideo', pix_fmt='rgb24')
@@ -53,7 +53,8 @@ def videoProcess(url_id):
             summ = 0
         summ += diff[i]
 
+    return cal
 
-    os.remove(folder + '/api/video/' + target)
-    print('delete video target!!')
+    # os.remove(folder + '/api/video/' + target)
+    # print('delete video target!!')
     """"""
