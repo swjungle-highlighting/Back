@@ -8,6 +8,8 @@
 '''
 
 import os
+import numpy as np
+import librosa
 
 def audioProcess(url_id):
     print('audio ' + url_id)
@@ -21,6 +23,15 @@ def audioProcess(url_id):
             target = filename
     print('audio target : ' + target)
 
+    wav, sr = librosa.load(target)
+
+    n_fft = 2048
+    hop_length = 512
+    stft = librosa.stft(wav, n_fft=n_fft, hop_length=hop_length)
+
+    spectrogram = np.abs(stft)
+    log_spectrogram = librosa.amplitude_to_db(spectrogram)
+    n = np.array(log_spectrogram)
 
     os.remove(folder+'/api/audio/'+target)
     print('delete audio target!!')

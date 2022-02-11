@@ -14,7 +14,7 @@ def chatProcess(url_id):
 
     """"""
 
-    chatset = pytchat.create(video_id=url_id)
+    chatset = pytchat.create(video_id=url_id, interruptable=False)
     while chatset.is_alive():
         try:
             data = chatset.get()

@@ -8,6 +8,8 @@
 '''
 
 import os
+import ffmpeg
+import numpy
 
 def videoProcess(url_id):
     print('video ' + url_id)
@@ -20,6 +22,37 @@ def videoProcess(url_id):
         if url_id in filename:
             target = filename
     print('video target : ' + target)
+
+    W, H, FPS = 128, 72, 10
+    out, err = (
+        ffmpeg
+            .input(target)
+            .filter('fps', fps=FPS, round='up')
+            .filter('scale', w=W, h=H)
+            .output('pipe:', format='rawvideo', pix_fmt='rgb24')
+            .run(capture_stdout=True)
+    )
+    frames = (
+        numpy
+            .frombuffer(out, numpy.uint8)
+            .reshape([-1, H, W, 3])
+    )
+
+    diff = []
+    cal = []
+    before = 0
+    for i in range(len(frames)):
+        now = int(frames[i].sum())
+        diff.append(abs(now - before) // 1000)
+        before = now
+
+    summ = 0
+    for i in range(len(diff)):
+        if not i % FPS:
+            cal.append(summ)
+            summ = 0
+        summ += diff[i]
+
 
     os.remove(folder + '/api/video/' + target)
     print('delete video target!!')
