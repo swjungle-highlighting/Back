@@ -11,7 +11,7 @@ import os
 import numpy as np
 import librosa
 
-def audioProcess(url_id):
+def audioProcess(url_id, duration):
     print('audio ' + url_id)
 
     """"""

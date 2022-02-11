@@ -59,12 +59,14 @@ def downloadChat(url_id):
 def streamProcess(url):
     print('::stream::')
     url_id = url.split("=")[1]
+    duration = 0
     with yt_dlp.YoutubeDL(opts) as ydl:
         ydl.download([url])
-
-    # a= audioProcess(url_id)
-    b= videoProcess(url_id)
-    # c= chatProcess(url_id)
+        info_dict = ydl.extract_info(url, download=False)
+        duration = info_dict.get('duration', None)
+    a= audioProcess(url_id, duration)
+    b= videoProcess(url_id, duration)
+    c= chatProcess(url_id)
 
     folder = os.getcwd()
     target = ''
