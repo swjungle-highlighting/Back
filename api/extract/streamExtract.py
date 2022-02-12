@@ -43,6 +43,6 @@ def streamProcess(url):
     os.remove(folder + '/api/extract/' + target)
     print('delete stream target!!')
 
-    return {'auido' : audio,
+    return {'audio' : audio,
             'video' : video,
             'chat' : chat}
