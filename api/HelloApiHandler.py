@@ -60,7 +60,7 @@ class HelloApiHandler(Resource):
             }
 
             db.close()
-
+            print("Success read DB")
             return final_ret
 
         """

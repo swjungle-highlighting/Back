@@ -34,12 +34,14 @@ def audioProcess(url_id):
 
     amplitudes = numpy.frombuffer(out, numpy.float32)
 
+    FPS = 2
+    persec = SAMPLERATE // FPS
     cal = []
     summ = 0
     dirr = 1
-    for i in range(len(amplitudes)) :
-        if not i %(SAMPLERATE//100) :
-            cal.append(int(summ)*dirr)
+    for i in range(len(amplitudes)):
+        if not i % persec:
+            cal.append(int(1000 * summ // persec) * dirr)
             summ = 0
             dirr = -dirr
         summ += abs(amplitudes[i])
