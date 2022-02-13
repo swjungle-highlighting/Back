@@ -12,8 +12,9 @@ import numpy
 import ffmpeg
 
 def audioProcess(url_id):
+    print("########################################################")
     print('audio ' + url_id)
-
+    print("########################################################")
     """"""
 
     folder = os.getcwd()
@@ -21,9 +22,8 @@ def audioProcess(url_id):
     for filename in os.listdir(folder+'/api/extract/'):
         if url_id in filename:
             target = filename
-    print('audio target : ' + target)
 
-    SAMPLERATE = 11050
+    SAMPLERATE = 44100
 
     out, err = (
         ffmpeg
@@ -36,14 +36,14 @@ def audioProcess(url_id):
 
     cal = []
     summ = 0
-    for i in range(len(amplitudes)):
-        if not i % SAMPLERATE:
-            cal.append(summ)
+    dirr = 1
+    for i in range(len(amplitudes)) :
+        if not i %(SAMPLERATE//100) :
+            cal.append(int(summ)*dirr)
             summ = 0
+            dirr = -dirr
         summ += abs(amplitudes[i])
 
     return cal
 
-    # os.remove(folder+'/api/audio/'+target)
-    # print('delete audio target!!')
     """"""

@@ -12,8 +12,9 @@ import ffmpeg
 import numpy
 
 def videoProcess(url_id):
+    print("########################################################")
     print('video ' + url_id)
-
+    print("########################################################")
     """"""
 
     folder = os.getcwd()
@@ -21,7 +22,6 @@ def videoProcess(url_id):
     for filename in os.listdir(folder+'/api/extract/'):
         if url_id in filename:
             target = filename
-    print('video target : ' + target)
 
     W, H, FPS = 128, 72, 10
     out, err = (
@@ -55,6 +55,4 @@ def videoProcess(url_id):
 
     return cal
 
-    # os.remove(folder + '/api/video/' + target)
-    # print('delete video target!!')
     """"""
