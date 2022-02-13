@@ -11,6 +11,9 @@ import os
 import ffmpeg
 import numpy
 
+W, H = 128, 72
+FPS = 10
+
 def videoProcess(url_id):
     print("########################################################")
     print('video ' + url_id)
@@ -23,7 +26,6 @@ def videoProcess(url_id):
         if url_id in filename:
             target = filename
 
-    W, H, FPS = 128, 72, 10
     out, err = (
         ffmpeg
             .input(folder+'/api/extract/'+target)
@@ -39,20 +41,20 @@ def videoProcess(url_id):
     )
 
     diff = []
-    cal = []
     before = 0
     for i in range(len(frames)):
         now = int(frames[i].sum())
-        diff.append(abs(now - before) // 1000)
+        diff.append(abs(now - before) // 768)
         before = now
 
+    VideoDATA_3600perHOUR = []
     summ = 0
     for i in range(len(diff)):
-        if not i % FPS:
-            cal.append(summ)
+        if not i %FPS:
+            VideoDATA_3600perHOUR.append(summ)
             summ = 0
         summ += diff[i]
 
-    return cal
+    return VideoDATA_3600perHOUR
 
     """"""
