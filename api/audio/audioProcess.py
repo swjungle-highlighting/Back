@@ -37,15 +37,15 @@ def audioProcess(url_id):
 
     
     persec = SAMPLERATE // FPS
-    cal = []
+    AudioDATA_7200perHOUR = []
     pick, dirr = 0, 1
     for i in range(len(amplitudes)) : 
         if not i %persec : 
-            cal.append(int(1000 *pick) *dirr)
+            AudioDATA_7200perHOUR.append(int(1000 *pick) *dirr)
             pick = 0
             dirr = -dirr
         pick = max(pick, abs(amplitudes[i]))
 
-    return cal
+    return AudioDATA_7200perHOUR
 
     """"""
