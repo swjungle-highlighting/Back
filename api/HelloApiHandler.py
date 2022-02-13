@@ -12,6 +12,8 @@ from flask_restful import Api, Resource, reqparse
 from api.extract.streamExtract import streamProcess
 import time
 
+from password import dbpw
+
 class HelloApiHandler(Resource):
     def get(self):
         return {
@@ -28,6 +30,11 @@ class HelloApiHandler(Resource):
         print(args)
 
         request_url = args['url']
+
+        """
+        check database
+        """
+
 
         """
         stream data fetch start

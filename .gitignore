@@ -21,4 +21,7 @@ sketch
 ### flask ###
 __pycache__
 
+### password """
+password.py
+
 # End of https://www.toptal.com/developers/gitignore/api/react
