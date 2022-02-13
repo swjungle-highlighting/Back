@@ -12,7 +12,7 @@ import numpy
 import ffmpeg
 
 SAMPLERATE = 44100
-FPS = 2
+SPS = 2
 
 def audioProcess(url_id):
     print("########################################################")
@@ -35,9 +35,9 @@ def audioProcess(url_id):
 
     amplitudes = numpy.frombuffer(out, numpy.float32)
 
-    
-    persec = SAMPLERATE // FPS
     AudioPick_7200perHOUR = []
+
+    persec = SAMPLERATE // SPS
     pick, dirr = 0, 1
     for i in range(len(amplitudes)) : 
         if not i %persec : 

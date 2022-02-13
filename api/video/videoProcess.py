@@ -40,21 +40,16 @@ def videoProcess(url_id):
             .reshape([-1, H, W, 3])
     )
 
-    diff = []
-    before = 0
-    for i in range(len(frames)):
-        now = int(frames[i].sum())
-        diff.append(abs(now - before) // 768)
-        before = now
-
     VideoDATA_3600perHOUR = []
-    summ = 0
-    for i in range(len(diff)):
-        if not i %FPS:
+
+    summ, before = 0, numpy.array([])
+    for i in range(1, len(frames)) : 
+        if not i %FPS : 
             VideoDATA_3600perHOUR.append(summ)
             summ = 0
-        summ += diff[i]
-
+        now = frames[i]
+        summ += abs(int(now.sum()) - int(before.sum()))
+        before = now
     return VideoDATA_3600perHOUR
 
     """"""
