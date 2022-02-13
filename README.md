@@ -37,6 +37,9 @@
     ValueError: signal only works in main thread of the main interpreter
     check ref 5
 
+## database
+    pymysql
+
 ref : 
 1. https://towardsdatascience.com/build-deploy-a-react-flask-app-47a89a5d17d9
 2. https://dev.to/nagatodev/how-to-connect-flask-to-reactjs-1k8i
