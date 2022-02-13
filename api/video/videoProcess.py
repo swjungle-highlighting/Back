@@ -50,6 +50,7 @@ def videoProcess(url_id):
         now = frames[i]
         summ += abs(int(now.sum()) - int(before.sum()))
         before = now
+        
     return VideoDATA_3600perHOUR
 
     """"""
