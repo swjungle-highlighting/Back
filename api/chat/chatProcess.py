@@ -15,7 +15,6 @@ def chatProcess(url_id, duration):
     print("########################################################")
     """"""
 
-    ####### 영상 길이 동적으로
     maxminute = (duration//60)+1
     Distribution = [0 for i in range(maxminute + 1)]
 

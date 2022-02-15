@@ -52,13 +52,7 @@ def videoProcess(url_id):
         before = now
     
     VideoDATA_3600perHOUR[0] = 0
-    OUTPUT_TEXT = []
-    for i in range(len(VideoDATA_3600perHOUR)) : 
-        elem = {}
-        elem['time'] = i
-        elem['video'] = VideoDATA_3600perHOUR[i]
-        OUTPUT_TEXT.append(elem)
 
-    return OUTPUT_TEXT
+    return VideoDATA_3600perHOUR
 
     """"""

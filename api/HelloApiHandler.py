@@ -72,6 +72,11 @@ class HelloApiHandler(Resource):
         finish = time.perf_counter()
         print(f'Finished in {round(finish - start, 2)} second(s)')
 
+        if res == False:
+            return {
+                "error" : "id is not valid"
+            }
+
         """
         stream data fetch end
         """
@@ -86,7 +91,9 @@ class HelloApiHandler(Resource):
         """
         insert database
         """
-        json_str = '{"audio":'+str(res['audio'])+', "video":'+str(res['video'])+', "chat":'+str(res['chat'])+'}'
+        title = res['title']
+        title = title.replace("'", "\\'")
+        json_str = '{"audio":'+str(res['audio'])+', "video":'+str(res['video'])+', "chat":'+str(res['chat'])+', "title":'+str('"'+title+'"')+', "thumbnail":'+str('"'+res['thumbnail']+'"')+'}'
         sql = "insert into youtube(url, result) values('"+request_url+"', '"+json_str+"');"
         cursor.execute(sql)
         print("Success insert DB")
