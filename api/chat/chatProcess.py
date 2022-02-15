@@ -16,35 +16,34 @@ def chatProcess(url_id, duration):
     """"""
 
     ####### 영상 길이 동적으로
-    maxminute = (duration//60)+1  # 10시간이면 충분하겠지
+    maxminute = (duration//60)+1
     Distribution = [0 for i in range(maxminute + 1)]
 
     chatset = pytchat.create(video_id=url_id, interruptable=False)
 
-    data = chatset.get()
-
     while chatset.is_alive():
         data = chatset.get()
         items = data.items
-        len_items = len(items)
-        if len_items:
-            t = items[0].elapsedTime
+        for item in items : 
+            t = item.elapsedTime
             lent = len(t)
-            if lent == 4:
+            if lent == 4 : 
                 hh = 0
                 mm = int(t[0])
-            elif lent == 5:
+            elif lent == 5 :
                 hh = 0
-                mm = int(t[0:2])
-            elif lent == 7:
+                mm = max(0, int(t[0:2]))
+            elif lent == 7 : 
                 hh = int(t[0])
                 mm = int(t[2:4])
-            minute = hh * 60 + mm
-            # 혹시 최대 range 이상의 긴 영상이 제공될 경우 index over 방지
-            if minute > maxminute:
+            else : 
+                hh, mm = 0, 0
+            minute = hh*60 + mm
+            if minute > maxminute : 
                 break
-            Distribution[minute] += len_items
-
+            print([t, minute], end = ' ')
+            Distribution[minute] += 1
+    
     return Distribution
 
     """"""

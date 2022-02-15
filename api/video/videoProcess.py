@@ -43,14 +43,22 @@ def videoProcess(url_id):
     VideoDATA_3600perHOUR = []
 
     summ, before = 0, numpy.array([])
-    for i in range(1, len(frames)) : 
+    for i in range(len(frames)) : 
         if not i %FPS : 
             VideoDATA_3600perHOUR.append(summ)
             summ = 0
         now = frames[i]
         summ += abs(int(now.sum()) - int(before.sum()))
         before = now
-        
-    return VideoDATA_3600perHOUR
+    
+    VideoDATA_3600perHOUR[0] = 0
+    OUTPUT_TEXT = []
+    for i in range(len(VideoDATA_3600perHOUR)) : 
+        elem = {}
+        elem['time'] = i
+        elem['video'] = VideoDATA_3600perHOUR[i]
+        OUTPUT_TEXT.append(elem)
+
+    return OUTPUT_TEXT
 
     """"""
