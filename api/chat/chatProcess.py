@@ -37,10 +37,9 @@ def chatProcess(url_id, duration):
                 mm = int(t[2:4])
             else : 
                 hh, mm = 0, 0
-            minute = hh*60 + mm
+            minute = hh*60 + mm + 1
             if minute > maxminute : 
                 break
-            print([t, minute], end = ' ')
             Distribution[minute] += 1
     
     return Distribution

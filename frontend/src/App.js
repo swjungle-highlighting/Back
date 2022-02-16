@@ -1,70 +1,37 @@
+import React from "react";
+import { Route, Router, Switch, Link } from "react-router-dom";
+import Result from './pages/Result';
+import Loading from './pages/Loading';
+import Home from './pages/Home';
+import NotFound from "./pages/NotFound";
 import './App.css';
-import React, { useState} from "react";
-import axios from 'axios'
+import AppStateProvider from "./providers/AppStateProvider";
 
-function App() {
-
-  const [url, setUrl] = useState('URL : ')
-  const inputValue = document.getElementById('link')
-
-
-  function onChangeUrl(e){
-    console.log('call onChangeUrl()')
-    if (e.target.value.indexOf('youtube') !== -1)
-    {
-      console.log('This is Youtube link')
-      //  app header class 값을 변경
-    }
-    setUrl('URL : ' + e.target.value)
-  }
-
-  function sendUrl(e)
-  {
-    console.log('call sendUrl()')
-    if (inputValue)
-    {
-      console.log("인풋창 입력값 : ", inputValue.value)
-      axios.post('http://localhost:5000/flask/hello',
-          {
-            'url' : inputValue.value,
-          }).then(response =>
-      {
-        console.log("Success", response.data)
-      }).catch(error =>
-      {
-        console.log(error)
-      })
-    }
-  }
-
-  function getMethod(e)
-  {
-    console.log("call getMethod()")
-    axios.get('http://localhost:5000/flask/hello').then(response =>
-    {
-      console.log("Success", response.data)
-    }).catch(error =>
-    {
-      console.log(error)
-    })
-  }
-
+const App = () => {
   return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            유트하(유튜브, 트위치 하이라이트라는 뜻)
-          </p>
-
-          <input onChange={onChangeUrl} id='link' />
-          <h3>{url}</h3>
-          <button onClick={sendUrl}>버튼</button>
-
-          <button onClick={getMethod}>get method 버튼</button>
-
-        </header>
-      </div>
+    <>
+      <AppStateProvider>
+          <Switch>
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/loading" component={Loading} />
+            <Route path="/result" component={Result} />
+            <Route path="/notfound" component={NotFound} />
+            {/* <Route path="/result/:url" component={NotFound} /> */}
+          </Switch>
+          {/* <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/result">Result</Link>
+            </li>
+            <li>
+              <Link to="/loading">Loading</Link>
+            </li>
+          </ul> */}
+      </AppStateProvider>
+    </>
   );
-}
+};
 
 export default App;

@@ -13,6 +13,7 @@ import numpy
 
 W, H = 128, 72
 FPS = 10
+DIFF_CUTLINE = 5000000
 
 def videoProcess(url_id):
     print("########################################################")
@@ -41,11 +42,10 @@ def videoProcess(url_id):
     )
 
     VideoDATA_3600perHOUR = []
-
     summ, before = 0, numpy.array([])
     for i in range(len(frames)) : 
         if not i %FPS : 
-            VideoDATA_3600perHOUR.append(summ)
+            VideoDATA_3600perHOUR.append(min(summ, DIFF_CUTLINE))
             summ = 0
         now = frames[i]
         summ += abs(int(now.sum()) - int(before.sum()))
