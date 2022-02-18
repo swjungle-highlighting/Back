@@ -10,11 +10,19 @@ logs
 **/*.back.*
 
 frontend/node_modules
+frontend/build
 
 *.sublime*
 
 psd
 thumb
 sketch
+
+### flask ###
+__pycache__
+.idea
+
+### password """
+password.py
 
 # End of https://www.toptal.com/developers/gitignore/api/react
