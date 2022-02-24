@@ -31,37 +31,37 @@ class HelloApiHandler(Resource):
 
         request_url = args['url']
 
-        """
-        check database
-        """
-        db = pymysql.connect(
-            host=dbip,
-            port=3306,
-            user='root',
-            password=dbpw,
-            db='highlighting', charset='utf8', autocommit=True  # 실행결과확정
-        )
+        # """
+        # check database
+        # """
+        # db = pymysql.connect(
+        #     host=dbip,
+        #     port=3306,
+        #     user='root',
+        #     password=dbpw,
+        #     db='highlighting', charset='utf8', autocommit=True  # 실행결과확정
+        # )
 
-        cursor = db.cursor()
-        sql = 'SELECT result FROM youtube WHERE url="' + request_url + '";'
-        cursor.execute(sql)
+        # cursor = db.cursor()
+        # sql = 'SELECT result FROM youtube WHERE url="' + request_url + '";'
+        # cursor.execute(sql)
 
-        data = cursor.fetchone()
+        # data = cursor.fetchone()
 
-        if data :
-            # if url in db
-            result = eval(data[0])
+        # if data :
+        #     # if url in db
+        #     result = eval(data[0])
 
-            final_ret = {
-                "type": "POST",
-                "status": "This is Database",
-                "url": request_url,
-                "result": result
-            }
+        #     final_ret = {
+        #         "type": "POST",
+        #         "status": "This is Database",
+        #         "url": request_url,
+        #         "result": result
+        #     }
 
-            db.close()
-            print("Success read DB")
-            return final_ret
+        #     db.close()
+        #     print("Success read DB")
+        #     return final_ret
 
         """
         stream data fetch start
@@ -71,6 +71,11 @@ class HelloApiHandler(Resource):
         res = streamProcess(request_url)
         finish = time.perf_counter()
         print(f'Finished in {round(finish - start, 2)} second(s)')
+
+        if res == False:
+            return {
+                "error" : "id is not valid"
+            }
 
         """
         stream data fetch end
@@ -83,14 +88,16 @@ class HelloApiHandler(Resource):
             "result" : res
         }
 
-        """
-        insert database
-        """
-        json_str = '{"audio":'+str(res['audio'])+', "video":'+str(res['video'])+', "chat":'+str(res['chat'])+'}'
-        sql = "insert into youtube(url, result) values('"+request_url+"', '"+json_str+"');"
-        cursor.execute(sql)
-        print("Success insert DB")
+        # """
+        # insert database
+        # """
+        # title = res['title']
+        # title = title.replace("'", "\\'")
+        # json_str = '{"audio":'+str(res['audio'])+', "video":'+str(res['video'])+', "chat":'+str(res['chat'])+', "title":'+str('"'+title+'"')+', "thumbnail":'+str('"'+res['thumbnail']+'"')+'}'
+        # sql = "insert into youtube(url, result) values('"+request_url+"', '"+json_str+"');"
+        # cursor.execute(sql)
+        # print("Success insert DB")
 
-        db.close()
+        # db.close()
 
         return final_ret
