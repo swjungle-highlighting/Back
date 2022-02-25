@@ -45,8 +45,8 @@ def _calculate_superchat(currency, amount) :
 
 def chatProcess(url_id, duration) :
 
-    Distribution = [0 for i in range(duration+1)]
-    SuperchatAmount = [0 for i in range(duration+1)]
+    Distribution = [0 for i in range(duration)]
+    SuperchatAmount = [0 for i in range(duration)]
     MessageSet = {}
 
     chatset = pytchat.create(video_id=url_id, interruptable=False)
@@ -56,7 +56,7 @@ def chatProcess(url_id, duration) :
         items = data.items
         for item in items : 
             second = _parse_elapsedTime(item.elapsedTime)
-            if second > duration or second < 0 : 
+            if second >= duration or second < 0 : 
                 continue
             Distribution[second] += 1
             message = _filter_message(item.message)
