@@ -39,8 +39,8 @@ def audioProcess(url_id):
 
     persec = SAMPLERATE // GETPICK_PERSEC
     pick, dirr = 0, 1
-    for i in range(1, len(amplitudes)) : 
-        if not i %persec : 
+    for i in range(1, len(amplitudes)) :
+        if not i %persec :
             AudioPick_7200perHOUR.append(int(1000 *pick) *dirr)
             pick = 0
             dirr = -dirr

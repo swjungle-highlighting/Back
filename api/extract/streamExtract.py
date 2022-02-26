@@ -1,25 +1,33 @@
+# -*- coding: UTF-8 -*-
+'''
+@Project ：youtube_highlight_extract 
+@File ：streamExtract.py
+@IDE  ：PyCharm 
+@Author ： Hwang
+@Date ：2022-02-09 오후 12:30 
+'''
 import os
+
 import yt_dlp
 
 from api.audio.audioProcess import audioProcess
 from api.video.videoProcess import videoProcess
 from api.chat.chatProcess import chatProcess
 
-def _sec_to_str(sec) : 
+def _sec_to_str(sec) :
     t = []
     t.append(sec %60)
     t.append((sec %3600 -t[0])//60)
     t.append(sec //3600)
-    for i in range(3) : 
-        if t[i] < 10 : 
+    for i in range(3) :
+        if t[i] < 10 :
             t[i] = '0'+str(t[i])
-        else : 
+        else :
             t[i] = str(t[i])
     return t[2]+':'+t[1]+':'+t[0]
 
-
 CUT_RANGE = 600
-def _do_subprocess(input_file, duration, index, audio, video) : 
+def _do_subprocess(input_file, duration, index, audio, video) :
     output_file = str(index) + input_file
     start = index * CUT_RANGE
     end = min(duration, (index+1) * CUT_RANGE)
@@ -54,7 +62,7 @@ def streamProcess(url):
     audio= []
     video= []
     index = 0
-    while index <= duration //CUT_RANGE : 
+    while index <= duration //CUT_RANGE :
         _do_subprocess(input_file, duration, index, audio, video)
         index += 1
 
@@ -76,4 +84,5 @@ def streamProcess(url):
             'chat' : chat,
             'title' : title,
             'thumbnail' : thumbnail,
+            'duration' : duration
             }

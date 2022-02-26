@@ -15,6 +15,7 @@ W, H = 128, 72
 FPS = 10
 DIFF_CUTLINE = 5000000
 
+
 def videoProcess(url_id):
     print("########################################################")
     print('video ' + url_id)
@@ -23,13 +24,13 @@ def videoProcess(url_id):
 
     folder = os.getcwd()
     target = ''
-    for filename in os.listdir(folder+'/'):
+    for filename in os.listdir(folder + '/'):
         if url_id in filename:
             target = filename
 
     out, err = (
         ffmpeg
-            .input(folder+'/'+target)
+            .input(folder + '/' + target)
             .filter('fps', fps=FPS, round='up')
             .filter('scale', w=W, h=H)
             .output('pipe:', format='rawvideo', pix_fmt='rgb24')
@@ -43,8 +44,8 @@ def videoProcess(url_id):
 
     VideoDATA_3600perHOUR = []
     summ, before = 0, numpy.array([])
-    for i in range(1, len(frames)) : 
-        if not i %FPS : 
+    for i in range(1, len(frames)):
+        if not i % FPS:
             VideoDATA_3600perHOUR.append(min(summ, DIFF_CUTLINE))
             summ = 0
         now = frames[i]
@@ -52,7 +53,7 @@ def videoProcess(url_id):
         before = now
 
     VideoDATA_3600perHOUR[0] = 0
-    
+
     return VideoDATA_3600perHOUR
 
     """"""

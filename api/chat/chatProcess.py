@@ -1,3 +1,12 @@
+# -*- coding: UTF-8 -*-
+'''
+@Project ：youtube_highlight_extract 
+@File ：chatProcess.py
+@IDE  ：PyCharm 
+@Author ： Hwang
+@Date ：2022-02-09 오후 6:38 
+'''
+
 import pytchat
 
 from collections import defaultdict
@@ -15,7 +24,7 @@ exch['RUB'] = 15
 
 
 def _parse_elapsedTime(t) :
-    if t[0] == '-' : 
+    if t[0] == '-' :
         return -1
     lent = len(t)
     if lent == 4 :
@@ -34,11 +43,11 @@ def _parse_elapsedTime(t) :
         hh, mm, ss = 0, 0, -1
     return hh*3600 + mm*60 + ss
 
-def _filter_message(message) : 
+def _filter_message(message) :
     return message
 
 
-def _calculate_superchat(currency, amount) : 
+def _calculate_superchat(currency, amount) :
     return int(exch[currency] * amount)
 
 RANGE_SUPERCHAT = 300
@@ -54,24 +63,24 @@ def chatProcess(url_id, duration) :
     while chatset.is_alive() :
         data = chatset.get()
         items = data.items
-        for item in items : 
+        for item in items :
             second = _parse_elapsedTime(item.elapsedTime)
-            if second >= duration or second < 0 : 
+            if second >= duration or second < 0 :
                 continue
             Distribution[second //RANGE_DISTRIBUTION] += 1
             message = _filter_message(item.message)
-            try : 
+            try :
                 MessageSet[second].append(message)
-            except : 
+            except :
                 MessageSet[second] = [message]
                 checkTime.append(second)
-            if item.amountValue : 
+            if item.amountValue :
                 SuperchatAmount[second //RANGE_SUPERCHAT] += _calculate_superchat(item.currency, item.amountValue)
 
     path = './chat_storage/' + url_id + '.txt'
-    chat_file = open(path, "w", encoding = 'UTF8')  
-    for i in checkTime : 
+    chat_file = open(path, "w", encoding = 'UTF8')
+    for i in checkTime :
         chat_file.writelines(str(i) + ' ' + str(MessageSet[i]) + '\n')
     chat_file.close()
 
-    return Distribution, MessageSet, SuperchatAmount
+    return [Distribution, MessageSet, SuperchatAmount]
