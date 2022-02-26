@@ -11,7 +11,7 @@ import os
 import numpy
 import ffmpeg
 
-SAMPLERATE = 44100
+SAMPLERATE = 11025
 GETPICK_PERSEC = 2
 
 def audioProcess(url_id):

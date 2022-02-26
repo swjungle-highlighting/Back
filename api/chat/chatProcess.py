@@ -1,6 +1,5 @@
 import pytchat
 
-
 from collections import defaultdict
 exch =  defaultdict(lambda : 1)
 exch['USD'] = 1200
@@ -42,13 +41,14 @@ def _filter_message(message) :
 def _calculate_superchat(currency, amount) : 
     return int(exch[currency] * amount)
 
-
+RANGE_SUPERCHAT = 300
+RANGE_DISTRIBUTION = 10
 def chatProcess(url_id, duration) :
 
-    Distribution = [0 for i in range(duration)]
-    SuperchatAmount = [0 for i in range(duration)]
+    Distribution = [0 for i in range(duration //RANGE_DISTRIBUTION +1)]
+    SuperchatAmount = [0 for i in range(duration //RANGE_SUPERCHAT +1)]
     MessageSet = {}
-
+    checkTime = []
     chatset = pytchat.create(video_id=url_id, interruptable=False)
 
     while chatset.is_alive() :
@@ -58,13 +58,20 @@ def chatProcess(url_id, duration) :
             second = _parse_elapsedTime(item.elapsedTime)
             if second >= duration or second < 0 : 
                 continue
-            Distribution[second] += 1
+            Distribution[second //RANGE_DISTRIBUTION] += 1
             message = _filter_message(item.message)
             try : 
                 MessageSet[second].append(message)
             except : 
                 MessageSet[second] = [message]
+                checkTime.append(second)
             if item.amountValue : 
-                SuperchatAmount[second] += _calculate_superchat(item.currency, item.amountValue)
+                SuperchatAmount[second //RANGE_SUPERCHAT] += _calculate_superchat(item.currency, item.amountValue)
+
+    path = './chat_storage/' + url_id + '.txt'
+    chat_file = open(path, "w", encoding = 'UTF8')  
+    for i in checkTime : 
+        chat_file.writelines(str(i) + ' ' + str(MessageSet[i]) + '\n')
+    chat_file.close()
 
     return Distribution, MessageSet, SuperchatAmount

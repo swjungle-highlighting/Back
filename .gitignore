@@ -25,4 +25,7 @@ __pycache__
 ### password """
 password.py
 
+### storage
+chat_storage
+
 # End of https://www.toptal.com/developers/gitignore/api/react
