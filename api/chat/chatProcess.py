@@ -79,6 +79,7 @@ def chatProcess(url_id, duration) :
 
     path = './chat_storage/' + url_id + '.txt'
     chat_file = open(path, "w", encoding = 'UTF8')
+    chat_file.writelines(str(duration) + ' duration(sec)' '\n')
     for i in checkTime :
         chat_file.writelines(str(i) + ' ' + str(MessageSet[i]) + '\n')
     chat_file.close()

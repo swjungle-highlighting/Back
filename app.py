@@ -11,6 +11,8 @@ from flask import Flask, send_from_directory
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 from api.HelloApiHandler import HelloApiHandler
+from api.KeywordsApiHandler import KeywordsApiHandler
+from api.DownloadApiHandler import DownloadApiHandler
 
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 CORS(app)
@@ -21,3 +23,5 @@ def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
 api.add_resource(HelloApiHandler, '/flask/hello')
+api.add_resource(KeywordsApiHandler, '/flask/keywords')
+api.add_resource(DownloadApiHandler, '/flask/download')

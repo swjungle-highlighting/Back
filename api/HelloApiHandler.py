@@ -10,37 +10,10 @@ import pymysql
 from flask_restful import Api, Resource, reqparse
 
 from api.extract.streamExtract import streamProcess
+from api.HelperFunctions import return_MessageSet
 import time
 
 from password import dbpw, dbip
-
-
-
-digit = ['0','1','2','3','4','5','6','7','8','9']
-def _cut_time_and_messageset(line) :
-    i = 0
-    elapsetime = ''
-    while line[i] in digit :
-        elapsetime += line[i]
-        i += 1
-    return int(elapsetime), line[i+1:]
-
-def _str_to_list(message) :
-    return message[2:len(message)-3].split("', '")
-
-## 이 함수 인풋값에 '5c3wiaogv-Q'같은 url id 입력하면 됨
-def return_MessageSet(URL_ID) :
-    MessageSet = {}
-    chat_file = open('./chat_storage/'+URL_ID+'.txt', "r", encoding = 'UTF8')
-    target = chat_file.readline().rstrip()
-    i = 0
-    while target :
-        second, message = _cut_time_and_messageset(target)
-        MessageSet[second] = _str_to_list(message)
-        i += 1
-        target = chat_file.readline()
-    chat_file.close()
-    return MessageSet
 
 
 class HelloApiHandler(Resource):
