@@ -7,7 +7,7 @@
 @Date ：2022-02-07 오후 5:28 
 '''
 
-from flask import Flask, send_from_directory, send_file
+from flask import Flask, request, send_from_directory, send_file
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 from api.HelloApiHandler import HelloApiHandler
@@ -30,6 +30,10 @@ api.add_resource(KeywordsApiHandler, '/flask/keywords')
 api.add_resource(BookMarkerApiHandler, '/bookmarker')
 api.add_resource(DownloadApiHandler, '/flask/download')
 
-@app.route("/downloadpath")
-def download() :
-    return send_file("HIGHLIGHTING.zip")
+@app.route("/downloadpath", methods = ['GET', 'POST'])
+def download() : 
+    if request.method == 'POST' :
+        print(request)
+        return '1'
+    if request.method == 'GET' :
+        return send_file("HIGHLIGHTING.zip")

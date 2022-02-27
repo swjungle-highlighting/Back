@@ -107,8 +107,8 @@ class AhoCorasick() :
 def _make_textfile(bookmarks) : 
     path = './api/download_logic/user_query.txt'
     chat_file = open(path, "w", encoding = 'UTF8')
-    for start, end in bookmarks :
-        chat_file.writelines(str(start) + ' ' + str(end) + '\n')
+    for start, end, memo in bookmarks :
+        chat_file.writelines(str(start) + ' ' + str(end) + ' ' + memo + '\n')
     chat_file.close()
 
 def _make_zipfile() : 
@@ -128,3 +128,23 @@ def _get_bookmarker(URL_ID):
     path = './bookmarker_storage/' + URL_ID + '.json'
     with open(path, 'r', encoding="UTF-8") as fp:
         return json.load(fp)
+
+##################################################################################
+## parse memo, start, end from bookmark json
+def _get_memo_and_timePointer(bookmark) : 
+    left = bookmark.split("'text': '")[1]
+    memo, i = '', 0 
+    while left[i] != "'" : 
+        memo += left[i]
+        i += 1
+    startPointer, left = _cut_time_and_messageset(left.split("startPointer': ")[1])
+    endPointer, left = _cut_time_and_messageset(left.split("endPointer': ")[1])
+    return memo, startPointer, endPointer
+
+def _parse_bookmarker(bookmarks_str) : 
+    bookmarks = bookmarks_str[2:len(bookmarks_str)-2].split('}, {')
+    ret = []
+    for b in bookmarks : 
+        memo, startPointer, endPointer = _get_memo_and_timePointer(b)
+        ret.append([startPointer, endPointer, memo])
+    return ret

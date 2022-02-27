@@ -15,9 +15,9 @@ class BookMarkerApiHandler(Resource):
         parser.add_argument('url', type=str)
 
         args = parser.parse_args()
-
         request_markers = args['markers']['list']
         request_url = args['url']
+
 
         url_id = request_url.split("=")[1]
         path = './bookmarker_storage/'+url_id+'.json'

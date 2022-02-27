@@ -1,7 +1,7 @@
 from flask_restful import Api, Resource, reqparse
 
 from api.download_logic.do_logic import create_cutTool, delete_cutTool
-
+from api.HelperFunctions import _parse_bookmarker
 
 class DownloadApiHandler(Resource) :
     def get(self):
@@ -19,11 +19,12 @@ class DownloadApiHandler(Resource) :
         parser.add_argument('status', type=str)
         parser.add_argument('bookmarks', type=str)
         args = parser.parse_args()
+        print(args['status'])
+        print(args['bookmarks'])
 
         if args['status'] == 'download_start' : 
-            bookmarks = args['bookmarks']
-            # need to parse bookmarks
-            create_cutTool([[0,100]])
+            bookmarks = _parse_bookmarker(args['bookmarks'])
+            create_cutTool(bookmarks)
         elif args['status'] == 'download_done' : 
             delete_cutTool()
         final_ret = {

@@ -12,8 +12,8 @@ def _sec_to_str(sec) :
             t[i] = str(t[i])
     return t[2]+':'+t[1]+':'+t[0]
 
-def cut_video(input_file, index, start, end) :
-    output_file = 'HIGHLIGHT_' + str(index) + '_' + input_file
+def cut_video(input_file, index, start, end, memo) :
+    output_file = 'HIGHLIGHT_' + str(index) + '_' + memo + '_' + input_file
     input_path = '"' + os.getcwd() + '/../' + input_file + '"'
     output_path = '"' + os.getcwd() + '/../' + output_file + '"'
     ffmpeg_call = ["ffmpeg -ss", _sec_to_str(start), "-to", _sec_to_str(end),  "-i", input_path, "-c copy", output_path]
@@ -25,8 +25,8 @@ chat_file = open('./user_query.txt', "r", encoding = 'UTF8')
 target = chat_file.readline().rstrip()
 index = 1
 while target : 
-    start, end = map(int, target.split())
-    cut_video(input_file, index, start, end)
+    start, end, memo = target.split()
+    cut_video(input_file, index, int(start), int(end), memo)
     index += 1
     target = chat_file.readline()
 chat_file.close()
