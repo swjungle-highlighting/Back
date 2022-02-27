@@ -6,11 +6,12 @@
 @Author ： Hwang
 @Date ：2022-02-07 오후 5:30 
 '''
+import json
 import pymysql
 from flask_restful import Api, Resource, reqparse
 
 from api.extract.streamExtract import streamProcess
-from api.HelperFunctions import return_MessageSet
+from api.HelperFunctions import return_MessageSet, _get_bookmarker
 import time
 
 from password import dbpw, dbip
@@ -31,6 +32,7 @@ class HelloApiHandler(Resource):
         print(args)
 
         request_url = args['url']
+        url_id = request_url.split("=")[1]
 
         """
         check database
@@ -52,17 +54,19 @@ class HelloApiHandler(Resource):
         if data :
             # if url in db
             result = eval(data[0])
-            url_id = request_url.split("=")[1]
             chat = result['chat']
             chatSet = return_MessageSet(url_id)
             chat = [chat[0]] + [chatSet] + [chat[1]]
             result['chat'] =chat
 
+            bookmarker = _get_bookmarker(url_id)
+
             final_ret = {
                 "type": "POST",
                 "status": "This is Database",
                 "url": request_url,
-                "result": result
+                "result": result,
+                "bookmarker" : bookmarker,
             }
 
             db.close()
@@ -87,11 +91,19 @@ class HelloApiHandler(Resource):
         stream data fetch end
         """
 
+        path = './bookmarker_storage/' + url_id + '.json'
+        temp = []
+        with open(path, 'w', encoding="UTF-8") as f:
+            json.dump(temp, f, ensure_ascii=False)
+        bookmarker = _get_bookmarker(url_id)
+
+
         final_ret = {
             "type" : "POST",
             "status" : "Success insert Database",
             "url" : request_url,
-            "result" : res
+            "result" : res,
+            "bookmarker": bookmarker,
         }
 
         """

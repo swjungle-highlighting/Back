@@ -1,9 +1,10 @@
 from collections import deque
 import os
 import zipfile
+import json
 
 ##################################################################################
-## parse duration and chatdata from /chat_storage textfile
+## parse elapsetime and chatdata from /chat_storage textfile
 digit = ['0','1','2','3','4','5','6','7','8','9']
 def _cut_time_and_messageset(line) :
     i = 0
@@ -120,3 +121,10 @@ def _make_zipfile() :
             zip_file.write(os.path.join(os.path.relpath(path, target), file), compress_type = zipfile.ZIP_DEFLATED)
     zip_file.close()
     os.chdir(root)
+
+##################################################################################
+## return dict(JSON) type Bookmarks from /bookmarker_storage JSONfile
+def _get_bookmarker(URL_ID):
+    path = './bookmarker_storage/' + URL_ID + '.json'
+    with open(path, 'r', encoding="UTF-8") as fp:
+        return json.load(fp)

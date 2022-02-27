@@ -12,6 +12,7 @@ from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 from api.HelloApiHandler import HelloApiHandler
 from api.KeywordsApiHandler import KeywordsApiHandler
+from api.BookMarkerApiHandler import BookMarkerApiHandler
 from api.DownloadApiHandler import DownloadApiHandler
 
 from api.download_logic.do_logic import create_cutTool, delete_cutTool
@@ -26,6 +27,7 @@ def serve(path):
 
 api.add_resource(HelloApiHandler, '/flask/hello')
 api.add_resource(KeywordsApiHandler, '/flask/keywords')
+api.add_resource(BookMarkerApiHandler, '/bookmarker')
 api.add_resource(DownloadApiHandler, '/flask/download')
 
 @app.route("/downloadpath")
