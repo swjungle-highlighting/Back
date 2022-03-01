@@ -32,8 +32,5 @@ api.add_resource(DownloadApiHandler, '/flask/download')
 
 @app.route("/downloadpath", methods = ['GET', 'POST'])
 def download() : 
-    if request.method == 'POST' :
-        print(request)
-        return '1'
     if request.method == 'GET' :
         return send_file("HIGHLIGHTING.zip")

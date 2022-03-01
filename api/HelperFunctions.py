@@ -104,8 +104,8 @@ class AhoCorasick() :
 
 ##################################################################################
 ## make textfile and zipfile for download cutting tool
-def _make_textfile(bookmarks) : 
-    path = './api/download_logic/user_query.txt'
+def _make_textfile(bookmarks, count) : 
+    path = f'./api/download_logic/user_query{count}.txt'
     chat_file = open(path, "w", encoding = 'UTF8')
     for start, end, memo in bookmarks :
         chat_file.writelines(str(start) + ' ' + str(end) + ' ' + memo + '\n')

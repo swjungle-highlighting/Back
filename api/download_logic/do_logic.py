@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 from api.HelperFunctions import _make_textfile, _make_zipfile
 
 def create_cutTool(bookmarks) : 
@@ -9,4 +10,5 @@ def create_cutTool(bookmarks) :
 
 def delete_cutTool() : 
     shutil.rmtree(r"./build")
+    time.sleep(10)
     os.remove('./HIGHLIGHTING.zip')

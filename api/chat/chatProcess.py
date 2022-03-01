@@ -55,7 +55,7 @@ RANGE_DISTRIBUTION = 10
 def chatProcess(url_id, duration) :
 
     Distribution = [0 for i in range(duration //RANGE_DISTRIBUTION +1)]
-    SuperchatAmount = [0 for i in range(duration //RANGE_SUPERCHAT +1)]
+    SuperchatAmount = [0 for i in range(duration //RANGE_SUPERCHAT +10)]
     MessageSet = {}
     checkTime = []
     chatset = pytchat.create(video_id=url_id, interruptable=False)
@@ -76,6 +76,13 @@ def chatProcess(url_id, duration) :
                 checkTime.append(second)
             if item.amountValue :
                 SuperchatAmount[second //RANGE_SUPERCHAT] += _calculate_superchat(item.currency, item.amountValue)
+                
+    SuperchatAmount_BarChart = [0 for i in range(duration)]
+    for i in range(duration) : 
+        if i %RANGE_SUPERCHAT : 
+            SuperchatAmount_BarChart[i] = SuperchatAmount[i //RANGE_SUPERCHAT]
+
+
 
     path = './chat_storage/' + url_id + '.txt'
     chat_file = open(path, "w", encoding = 'UTF8')
@@ -84,4 +91,4 @@ def chatProcess(url_id, duration) :
         chat_file.writelines(str(i) + ' ' + str(MessageSet[i]) + '\n')
     chat_file.close()
 
-    return [Distribution, MessageSet, SuperchatAmount]
+    return [Distribution, MessageSet, SuperchatAmount_BarChart]
