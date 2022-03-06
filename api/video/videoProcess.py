@@ -13,7 +13,7 @@ import numpy
 
 W, H = 128, 72
 FPS = 10
-DIFF_CUTLINE = 5000000
+DIFF_CUTLINE = 2000000
 
 
 def videoProcess(url_id):

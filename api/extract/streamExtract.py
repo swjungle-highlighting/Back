@@ -73,7 +73,6 @@ def streamProcess(url):
     for filename in os.listdir(folder + '/'):
         if url_id in filename:
             target = filename
-
     os.remove(folder + '/' + target)
     print('delete stream target!!')
     print(len(video), len(audio), len(chat[0]))

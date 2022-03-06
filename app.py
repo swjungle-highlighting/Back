@@ -14,6 +14,7 @@ from api.HelloApiHandler import HelloApiHandler
 from api.KeywordsApiHandler import KeywordsApiHandler
 from api.BookMarkerApiHandler import BookMarkerApiHandler
 from api.DownloadApiHandler import DownloadApiHandler
+from api.ExtensionApiHandler import ExtensionApiHandler
 
 from api.download_logic.do_logic import create_cutTool, delete_cutTool
 
@@ -29,6 +30,7 @@ api.add_resource(HelloApiHandler, '/flask/hello')
 api.add_resource(KeywordsApiHandler, '/flask/keywords')
 api.add_resource(BookMarkerApiHandler, '/bookmarker')
 api.add_resource(DownloadApiHandler, '/flask/download')
+api.add_resource(ExtensionApiHandler, '/extension')
 
 @app.route("/downloadpath", methods = ['GET', 'POST'])
 def download() : 

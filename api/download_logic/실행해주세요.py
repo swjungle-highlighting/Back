@@ -26,8 +26,12 @@ def _sec_to_str(sec) :
             t[i] = str(t[i])
     return t[2]+':'+t[1]+':'+t[0]
 
-def cut_video(input_file, index, start, end, memo) :
-    output_file = 'HIGHLIGHT_' + str(index) + '_' + memo + input_file
+def cut_video(input_file, index, start, end, memo) : 
+    ext = input_file.split('.')[-1]
+    idx = str(index)
+    if len(idx) == 1 : 
+        idx = '0' + idx
+    output_file = idx + '_' + memo + 'HIGHLIGHT.' + ext
     input_path = '"' + os.getcwd() + '/../' + input_file + '"'
     output_path = '"' + os.getcwd() + '/../' + output_file + '"'
     ffmpeg_call = ["ffmpeg -ss", _sec_to_str(start), "-to", _sec_to_str(end),  "-i", input_path, "-c copy", output_path]

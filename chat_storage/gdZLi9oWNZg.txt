@@ -68,7 +68,7 @@
 87 ['OMG:elbowcough::elbowcough::elbowcough::elbowcough::elbowcough:', 'park jiminnnn :person_gesturing_ok::red_heart::red_heart::red_heart:', 'okayy vvvvvv']
 88 ['omggg', 'que no emojis >:V', 'Oh My Heart!!', 'Kookie', 'YASSSSSSSSSSSSSSSS', 'BTS !!']
 89 ['정국 !!', 'LATIN KING', 'wow', 'AHHHH']
-90 [':blue_heart::blue_heart::blue_heart:', 'omg', ':eye::mouth::eye:', 'trời đất thần thiên địa ơi', 'tS!', 'BTS OMG :red_heart::red_heart::red_heart::red_heart::red_heart:', 'I love it', ':star_struck::smiling_face_with_heart_eyes:', ':sneezing_face::red_heart:']
+90 [':blue_heart::blue_heart::blue_heart:', ':eye::mouth::eye:', 'trời đất thần thiên địa ơi', 'tS!', 'BTS OMG :red_heart::red_heart::red_heart::red_heart::red_heart:', 'I love it', ':star_struck::smiling_face_with_heart_eyes:', ':sneezing_face::red_heart:']
 91 ['BTS:fire:', 'Jungkook :loudly_crying_face::purple_heart:', 'Bts forever', 'omggggggg', ':smiling_face_with_heart_eyes::smiling_face_with_heart_eyes::smiling_face_with_heart_eyes::smiling_face_with_heart_eyes::smiling_face_with_heart_eyes:', 'Mi corazon salio del chat', ':virtualhug::virtualhug:', 'Xỉu', 'ISSA BOP', 'OMEGAAAD TOLONG']
 92 ['BRO LOS AMO', '¿NO SE CANSAN DE SER TAN BELLOS?', 'lindossss', 'woeee', 'yes yes yes yes', 'taehyunggg i love you ahhhhh']
 93 ['omg jimin jk', 'omg', 'omg']

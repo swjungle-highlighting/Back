@@ -22,7 +22,7 @@ class DownloadApiHandler(Resource) :
         bookmarks = _parse_bookmarker(args['bookmarks'])
         self.downloadcount += 1
         print(self.downloadcount)
-        create_cutTool(bookmarks)
+        create_cutTool(bookmarks, self.downloadcount)
             
         final_ret = {
             "type" : "POST",
