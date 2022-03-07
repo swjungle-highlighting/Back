@@ -27,5 +27,8 @@ password.py
 
 ### storage
 chat_storage
+sprite_storage
+bookmarker_storage
+static
 
 # End of https://www.toptal.com/developers/gitignore/api/react
