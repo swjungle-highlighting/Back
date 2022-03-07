@@ -14,6 +14,8 @@ from api.audio.audioProcess import audioProcess
 from api.video.videoProcess import videoProcess
 from api.chat.chatProcess import chatProcess
 
+from api.extract.spriteExtract import make_sprite
+
 def _sec_to_str(sec) :
     t = []
     t.append(sec %60)
@@ -67,6 +69,7 @@ def streamProcess(url):
         index += 1
 
     chat = chatProcess(url_id, duration)
+    make_sprite(url_id+'.mp4')
 
     folder = os.getcwd()
     target = ''
