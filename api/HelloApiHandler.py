@@ -42,7 +42,7 @@ class HelloApiHandler(Resource):
             port=3306,
             user='root',
             password=dbpw,
-            db='highlighting', charset='utf8', autocommit=True  # 실행결과확정
+            db='highlighting', charset='utf8', autocommit=True
         )
 
         cursor = db.cursor()
